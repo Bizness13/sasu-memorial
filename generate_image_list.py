@@ -1,3 +1,4 @@
+
 import os
 import json
 
@@ -19,3 +20,4 @@ with open(os.path.join(images_dir, 'images.json'), 'w') as f:
 
 print(f"Generated images.json with {len(image_files)} images")
 print("First 10 images:", image_files[:10])
+
