@@ -1,296 +1,261 @@
-// Smooth scroll for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
 
-// Image Slideshow Functionality
-let currentSlide = 0;
-let images = [];
-let isPlaying = true;
-let slideshowInterval;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Loving Memory of Surafel M. Techane (Sasu)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">Sasu Techane</a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#life">His Life</a></li>
+                <li><a href="#teffbar">TeffBar Legacy</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#memories">Share Memories</a></li>
+                <li><a href="#tribute">Tributes</a></li>
+            </ul>
+        </div>
+    </nav>
 
-// Function to load all images from the images folder
-async function loadImages() {
-    // Since we can't directly read directory contents in the browser,
-    // we'll need to manually list the images or use a build script
-    // For now, we'll create a comprehensive list of common image extensions
-    
-    const imageFolder = 'images/';
-    const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'JPG', 'JPEG', 'PNG', 'GIF'];
-    
-    // This approach requires you to list your images
-    // You can generate this list automatically using a simple script
-    // For now, let's try to load images dynamically
-    
-    // Alternative: Load images by trying common patterns
-    const loadedImages = [];
-    
-    // Try to load images from your folder
-    // Since you have 238 images, we'll need to get the actual filenames
-    // The best approach is to create an images.json file with all filenames
-    
-    try {
-        const response = await fetch('images/images.json');
-        if (response.ok) {
-            const imageList = await response.json();
-            images = imageList.map(img => imageFolder + img);
-        } else {
-            // Fallback: try to load images with common naming patterns
-            await loadImagesWithPatterns();
-        }
-    } catch (error) {
-        // If images.json doesn't exist, try pattern-based loading
-        await loadImagesWithPatterns();
-    }
-    
-    if (images.length > 0) {
-        initializeSlideshow();
-    } else {
-        document.getElementById('slideCounter').textContent = 'No images found. Please check the images folder.';
-    }
-}
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="ethiopian-pattern"></div>
+            <h1 class="hero-title">Surafel Mulugeta Techane</h1>
+            <p class="hero-subtitle">Sasu</p>
+            <p class="hero-dates">May 11, 1998 - July 11, 2025</p>
+            <p class="hero-quote">"My eyes see all. My eyes tell all."</p>
+            <p class="hero-quote-author">— Sasu Techane, 2011</p>
+        </div>
+    </section>
 
-// Fallback function to try loading images with common patterns
-async function loadImagesWithPatterns() {
-    const imageFolder = 'images/';
-    const extensions = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG'];
-    
-    // Try common naming patterns
-    const patterns = [
-        // Try numbered patterns
-        ...Array.from({length: 300}, (_, i) => `IMG_${String(i).padStart(4, '0')}`),
-        ...Array.from({length: 300}, (_, i) => `DSC_${String(i).padStart(4, '0')}`),
-        ...Array.from({length: 300}, (_, i) => `${i}`),
-        // Try other common patterns
-        'sasu', 'family', 'graduation', 'teffbar', 'music', 'friends', 'seattle', 'florence'
-    ];
-    
-    const loadPromises = [];
-    
-    for (const pattern of patterns) {
-        for (const ext of extensions) {
-            const imagePath = `${imageFolder}${pattern}.${ext}`;
-            loadPromises.push(
-                checkImageExists(imagePath).then(exists => {
-                    if (exists) images.push(imagePath);
-                })
-            );
-        }
-    }
-    
-    await Promise.all(loadPromises);
-}
+    <section id="life" class="life-story">
+        <div class="container">
+            <h2 class="section-title">A Brilliant Light</h2>
+            <div class="life-content">
+                <div class="life-text">
+                    <p class="intro-text">
+                        Surafel Mulugeta Techane, affectionately known as Sasu, was born in Seattle on May 11, 1998, 
+                        to Abebech Mulugeta and Zebene Techane. From birth, Sasu was an energetic and bright star 
+                        at home, school, and everywhere he went.
+                    </p>
+                    
+                    <h3>Early Years & Education</h3>
+                    <p>
+                        Sasu attended St. Joseph School on Capitol Hill for K-8, where as an 8th grader, he earned 
+                        a featured role in the Passion Play at Easter—among the first hints of his innate musical talent. 
+                        He moved on to Seattle Preparatory School for high school, where he was involved in student 
+                        government (all 4 years), varsity tennis, theater, mock trial, and community service, traveling 
+                        to New Orleans to help build housing for Hurricane Katrina victims. He graduated with honors in 2016.
+                    </p>
 
-// Check if an image exists
-function checkImageExists(url) {
-    return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = url;
-    });
-}
+                    <h3>New York University</h3>
+                    <p>
+                        Sasu was accepted to New York University's Stern School of Business with a prestigious MLK 
+                        Scholarship for his high academic achievement. He studied abroad in Florence his sophomore year 
+                        and quickly picked up conversational Italian. He completed his Bachelor of Science degree in 2020, 
+                        concentrating in Data Science and Information Systems with a minor in Music.
+                    </p>
 
-// Initialize the slideshow
-function initializeSlideshow() {
-    if (images.length === 0) return;
-    
-    // Display first image
-    showSlide(0);
-    
-    // Create thumbnails
-    createThumbnails();
-    
-    // Start autoplay
-    startSlideshow();
-    
-    // Set up controls
-    document.getElementById('prevBtn').addEventListener('click', () => {
-        changeSlide(-1);
-    });
-    
-    document.getElementById('nextBtn').addEventListener('click', () => {
-        changeSlide(1);
-    });
-    
-    document.getElementById('playPauseBtn').addEventListener('click', togglePlayPause);
-    
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') changeSlide(-1);
-        if (e.key === 'ArrowRight') changeSlide(1);
-        if (e.key === ' ') {
-            e.preventDefault();
-            togglePlayPause();
-        }
-    });
-}
+                    <h3>A Life of Purpose</h3>
+                    <p>
+                        After graduating, Sasu worked at BNP Paribas in New York as a financial analyst, passing the 
+                        grueling Series 7, SIE, and Series 63 exams. By day, he appeared to be a traditional junior banker, 
+                        but Sasu remained dedicated to his entrepreneurial and creative pursuits. He moved back to Seattle 
+                        to continue developing TeffBar and honing his singing and piano talents, producing and recording 
+                        song snippets for family and friends.
+                    </p>
 
-// Show a specific slide
-function showSlide(index) {
-    if (images.length === 0) return;
-    
-    currentSlide = (index + images.length) % images.length;
-    
-    const mainImage = document.getElementById('mainImage');
-    mainImage.src = images[currentSlide];
-    mainImage.alt = `Sasu's memory ${currentSlide + 1}`;
-    
-    document.getElementById('slideCounter').textContent = 
-        `${currentSlide + 1} / ${images.length}`;
-    
-    // Update active thumbnail
-    updateActiveThumbnail();
-}
-
-// Change slide
-function changeSlide(direction) {
-    showSlide(currentSlide + direction);
-    
-    // Reset autoplay timer
-    if (isPlaying) {
-        clearInterval(slideshowInterval);
-        startSlideshow();
-    }
-}
-
-// Create thumbnail grid
-function createThumbnails() {
-    const thumbnailGrid = document.getElementById('thumbnailGrid');
-    thumbnailGrid.innerHTML = '';
-    
-    images.forEach((imageSrc, index) => {
-        const thumbnail = document.createElement('div');
-        thumbnail.className = 'thumbnail';
-        if (index === 0) thumbnail.classList.add('active');
-        
-        const img = document.createElement('img');
-        img.src = imageSrc;
-        img.alt = `Thumbnail ${index + 1}`;
-        img.loading = 'lazy';
-        
-        thumbnail.appendChild(img);
-        thumbnail.addEventListener('click', () => {
-            showSlide(index);
-            if (isPlaying) {
-                clearInterval(slideshowInterval);
-                startSlideshow();
-            }
-        });
-        
-        thumbnailGrid.appendChild(thumbnail);
-    });
-}
-
-// Update active thumbnail
-function updateActiveThumbnail() {
-    const thumbnails = document.querySelectorAll('.thumbnail');
-    thumbnails.forEach((thumb, index) => {
-        thumb.classList.toggle('active', index === currentSlide);
-    });
-    
-    // Scroll active thumbnail into view
-    if (thumbnails[currentSlide]) {
-        thumbnails[currentSlide].scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest',
-            inline: 'center'
-        });
-    }
-}
-
-// Start slideshow
-function startSlideshow() {
-    slideshowInterval = setInterval(() => {
-        changeSlide(1);
-    }, 5000); // Change image every 5 seconds
-}
-
-// Toggle play/pause
-function togglePlayPause() {
-    const btn = document.getElementById('playPauseBtn');
-    
-    if (isPlaying) {
-        clearInterval(slideshowInterval);
-        btn.textContent = '▶';
-        isPlaying = false;
-    } else {
-        startSlideshow();
-        btn.textContent = '⏸';
-        isPlaying = true;
-    }
-}
-
-// Load images when page loads
-window.addEventListener('load', loadImages);
-
-// Memory form submission handler
-document.getElementById('memoryForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        relationship: document.getElementById('relationship').value,
-        memory: document.getElementById('memory').value,
-        timestamp: new Date().toISOString()
-    };
-    
-    // Store in localStorage for now
-    let memories = JSON.parse(localStorage.getItem('memories') || '[]');
-    memories.push(formData);
-    localStorage.setItem('memories', JSON.stringify(memories));
-    
-    // Show success message
-    alert('Thank you for sharing your memory of Sasu. Your tribute has been saved.');
-    
-    // Reset form
-    this.reset();
-    
-    // Optionally display the new memory
-    displayMemories();
-});
-
-// Display stored memories
-function displayMemories() {
-    const memories = JSON.parse(localStorage.getItem('memories') || '[]');
-    const tributeWall = document.getElementById('tributeWall');
-    
-    if (memories.length > 0) {
-        tributeWall.innerHTML = '';
-        
-        memories.reverse().forEach(memory => {
-            const tributeItem = document.createElement('div');
-            tributeItem.className = 'tribute-item';
-            
-            const date = new Date(memory.timestamp).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-            
-            tributeItem.innerHTML = `
-                <div class="tribute-header">
-                    <h4>${memory.name}</h4>
-                    <span class="tribute-date">${date}</span>
+                    <p class="closing-text">
+                        Surafel is described by all who knew him as a brilliant, funny, and loving person. His energy 
+                        was infectious and he radiated positivity. His untimely passing leaves every room he graced a 
+                        little bit dimmer, and he will be deeply missed and remembered forever.
+                    </p>
                 </div>
-                <p class="tribute-text">${memory.memory}</p>
-                <p class="tribute-author">— ${memory.relationship || 'A Friend'}</p>
-            `;
-            
-            tributeWall.appendChild(tributeItem);
-        });
-    }
-}
+            </div>
+        </div>
+    </section>
 
-// Load and display memories on page load
-window.addEventListener('load', displayMemories);
+    <section id="teffbar" class="teffbar-section">
+        <div class="container">
+            <h2 class="section-title">The TeffBar Legacy</h2>
+            <div class="teffbar-content">
+                <div class="teffbar-story">
+                    <div class="ethiopian-border"></div>
+                    <h3>A Bridge Between Cultures</h3>
+                    <p>
+                        In 2019, while still a student at NYU, Surafel launched The Teff Lab, a business selling 
+                        Teff Bars—the first health food bar to feature the nutrient-rich grain teff from his family's 
+                        home country of Ethiopia.
+                    </p>
+                    <p>
+                        Sasu was instilled at an early age by his parents to be passionate about his culture and heritage. 
+                        He aimed to build sustainable partnerships between Ethiopian teff farmers and the global market 
+                        through his work with TeffBar. He believed deeply in the power of ethical commerce and its ability 
+                        to improve the lives of people.
+                    </p>
+                    <p>
+                        Sasu was committed to ensuring teff farmers received fair compensation for their work. His dedication 
+                        to building bridges between traditional Ethiopian agriculture and modern health food markets created 
+                        new opportunities for Ethiopian teff farmers, while sharing the nutritional benefits of teff with the world.
+                    </p>
+                    <div class="teffbar-values">
+                        <div class="value-item">
+                            <h4>🌾 Ethiopian Heritage</h4>
+                            <p>Celebrating the ancient grain of Ethiopia</p>
+                        </div>
+                        <div class="value-item">
+                            <h4>🤝 Fair Trade</h4>
+                            <p>Supporting Ethiopian farmers with ethical partnerships</p>
+                        </div>
+                        <div class="value-item">
+                            <h4>💚 Health & Nutrition</h4>
+                            <p>Sharing teff's nutritional benefits with the world</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Memories in Pictures</h2>
+            <p class="gallery-intro">A celebration of Sasu's life through photographs</p>
+            
+            <!-- Main Slideshow -->
+            <div class="slideshow-container">
+                <div class="slideshow-main" id="slideshowMain">
+                    <div class="slide-counter" id="slideCounter">Loading images...</div>
+                    <img id="mainImage" src="" alt="Sasu's memories">
+                    <div class="slide-controls">
+                        <button class="slide-btn prev" id="prevBtn">❮</button>
+                        <button class="slide-btn play-pause" id="playPauseBtn">⏸</button>
+                        <button class="slide-btn next" id="nextBtn">❯</button>
+                    </div>
+                </div>
+                
+                <!-- Thumbnail Grid -->
+                <div class="thumbnail-grid" id="thumbnailGrid">
+                    <!-- Thumbnails will be dynamically loaded here -->
+                </div>
+            </div>
+            
+            <p class="gallery-note">
+                Slideshow automatically advances every 5 seconds. Click any thumbnail to jump to that photo.
+            </p>
+        </div>
+    </section>
+
+    <section id="memories" class="memories-section">
+        <div class="container">
+            <h2 class="section-title">Share Your Memories</h2>
+            <p class="section-subtitle">Help us celebrate Sasu's life by sharing your stories, photos, and memories</p>
+            
+            <form id="memoryForm" class="memory-form">
+                <div class="form-group">
+                    <label for="name">Your Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Your Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="relationship">Your Relationship to Sasu</label>
+                    <input type="text" id="relationship" name="relationship" placeholder="Friend, Classmate, Family, etc.">
+                </div>
+                
+                <div class="form-group">
+                    <label for="memory">Your Memory or Message *</label>
+                    <textarea id="memory" name="memory" rows="6" required placeholder="Share a favorite memory, story, or message..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Share Memory</button>
+            </form>
+            
+            <p class="form-note">
+                Note: This form collects submissions locally. To enable email delivery, you'll need to integrate 
+                with a service like Formspree, EmailJS, or a backend server.
+            </p>
+        </div>
+    </section>
+
+    <section id="tribute" class="tribute-section">
+        <div class="container">
+            <h2 class="section-title">Tributes & Condolences</h2>
+            
+            <div class="tribute-wall" id="tributeWall">
+                <!-- Tributes will be displayed here -->
+                <div class="tribute-item">
+                    <div class="tribute-header">
+                        <h4>Sample Tribute</h4>
+                        <span class="tribute-date">December 2025</span>
+                    </div>
+                    <p class="tribute-text">
+                        This is where shared memories and tributes will appear. Replace this with actual tributes 
+                        or connect to a database/service to display submitted memories.
+                    </p>
+                    <p class="tribute-author">— A Friend</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="poem-section">
+        <div class="container">
+            <div class="poem-content">
+                <h3>Eyes</h3>
+                <p class="poem-text">
+                    Eyes. Eyes. Eyes—<br>
+                    the ones that tell,<br>
+                    the ones that show emotion,<br>
+                    the ones that truly smile.<br><br>
+                    
+                    They see. They speak.<br>
+                    They tell stories,<br>
+                    they tell time.<br><br>
+                    
+                    My eyes witness.<br>
+                    My eyes tell the truth.<br>
+                    They shine like stars—<br>
+                    but can pierce like knives.<br><br>
+                    
+                    My eyes see all.<br>
+                    My eyes tell all.<br><br>
+                    
+                    my eyes will close again.
+                </p>
+                <p class="poem-author">— Sasu Techane (2011)</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">
+                    In Loving Memory of Surafel Mulugeta Techane<br>
+                    May 11, 1998 - July 11, 2025
+                </p>
+                <p class="footer-quote">
+                    "His energy was infectious and he radiated positivity."
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
