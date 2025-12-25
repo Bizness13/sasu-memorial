@@ -1,154 +1,524 @@
 
-/* Add these styles to your existing styles.css file */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* Slideshow Container */
-.slideshow-container {
-    max-width: 1000px;
+:root {
+    --ethiopian-green: #078930;
+    --ethiopian-yellow: #FCDD09;
+    --ethiopian-red: #DA121A;
+    --gold: #D4AF37;
+    --cream: #F5F1E8;
+    --dark-brown: #3E2723;
+    --light-brown: #8D6E63;
+    --text-dark: #2C2C2C;
+    --text-light: #666;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--cream);
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+}
+
+.container {
+    max-width: 1200px;
     margin: 0 auto;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    overflow: hidden;
+    padding: 0 20px;
 }
 
-.slideshow-main {
-    position: relative;
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
     width: 100%;
-    background: #000;
+    background: rgba(62, 39, 35, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.slideshow-main img {
-    width: 100%;
-    height: 600px;
-    object-fit: contain;
-    display: block;
-    background: #000;
-}
-
-.slide-counter {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    z-index: 10;
-}
-
-.slide-controls {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
     display: flex;
-    gap: 1rem;
-    z-index: 10;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.slide-btn {
-    background: rgba(255,255,255,0.9);
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+.nav-logo {
+    font-family: 'Cormorant Garamond', serif;
     font-size: 1.5rem;
-    cursor: pointer;
-    transition: all 0.3s;
+    font-weight: 600;
+    color: var(--gold);
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: var(--gold);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-
-.slide-btn:hover {
-    background: white;
-    transform: scale(1.1);
-}
-
-.slide-btn.play-pause {
-    font-size: 1.2rem;
-}
-
-/* Thumbnail Grid */
-.thumbnail-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 10px;
-    padding: 20px;
-    background: var(--cream);
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-.thumbnail {
-    cursor: pointer;
-    border-radius: 8px;
+    background: linear-gradient(135deg, var(--ethiopian-green) 0%, var(--dark-brown) 100%);
     overflow: hidden;
-    border: 3px solid transparent;
-    transition: all 0.3s;
-    aspect-ratio: 1;
 }
 
-.thumbnail:hover {
-    border-color: var(--ethiopian-yellow);
-    transform: scale(1.05);
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%23078930" width="20" height="20"/><rect fill="%23FCDD09" x="20" width="20" height="20"/><rect fill="%23DA121A" x="40" width="20" height="20"/></svg>');
+    background-size: 60px 60px;
+    opacity: 0.05;
 }
 
-.thumbnail.active {
-    border-color: var(--ethiopian-green);
-    box-shadow: 0 0 15px rgba(7, 137, 48, 0.5);
+.hero-content {
+    position: relative;
+    text-align: center;
+    color: white;
+    z-index: 1;
+    padding: 2rem;
 }
 
-.thumbnail img {
+.ethiopian-pattern {
+    width: 150px;
+    height: 5px;
+    margin: 0 auto 2rem;
+    background: linear-gradient(to right, var(--ethiopian-green) 33%, var(--ethiopian-yellow) 33%, var(--ethiopian-yellow) 66%, var(--ethiopian-red) 66%);
+}
+
+.hero-title {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-subtitle {
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+}
+
+.hero-dates {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.hero-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-top: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-quote-author {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    color: var(--gold);
+}
+
+/* Life Story Section */
+.life-story {
+    padding: 6rem 0;
+    background: white;
+}
+
+.section-title {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--dark-brown);
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: var(--gold);
+    margin: 1rem auto;
+}
+
+.life-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.life-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.intro-text {
+    font-size: 1.3rem;
+    color: var(--ethiopian-green);
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.life-text h3 {
+    font-size: 1.8rem;
+    color: var(--dark-brown);
+    margin: 2.5rem 0 1rem;
+}
+
+.closing-text {
+    font-style: italic;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--cream);
+    border-left: 4px solid var(--gold);
+}
+
+/* TeffBar Section */
+.teffbar-section {
+    padding: 6rem 0;
+    background: linear-gradient(to bottom, var(--cream), white);
+}
+
+.teffbar-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.ethiopian-border {
+    height: 8px;
+    background: linear-gradient(to right, var(--ethiopian-green) 33%, var(--ethiopian-yellow) 33%, var(--ethiopian-yellow) 66%, var(--ethiopian-red) 66%);
+    margin-bottom: 2rem;
+}
+
+.teffbar-story {
+    background: white;
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.teffbar-story h3 {
+    font-size: 2rem;
+    color: var(--ethiopian-green);
+    margin-bottom: 1.5rem;
+}
+
+.teffbar-story p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.teffbar-values {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.value-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--cream);
+    border-radius: 8px;
+}
+
+.value-item h4 {
+    font-size: 1.3rem;
+    color: var(--ethiopian-green);
+    margin-bottom: 0.5rem;
+}
+
+/* Gallery Section */
+.gallery-section {
+    padding: 6rem 0;
+    background: white;
+}
+
+.gallery-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 3rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.gallery-item img {
     width: 100%;
-    height: 100%;
+    height: 300px;
     object-fit: cover;
     display: block;
 }
 
-.gallery-note {
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+/* Memories Section */
+.memories-section {
+    padding: 6rem 0;
+    background: var(--cream);
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 3rem;
+}
+
+.memory-form {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--dark-brown);
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--ethiopian-green);
+}
+
+.submit-btn {
+    background: var(--ethiopian-green);
+    color: white;
+    padding: 1rem 3rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background: #056622;
+}
+
+.form-note {
     text-align: center;
     margin-top: 2rem;
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--text-light);
     font-style: italic;
 }
 
-/* Responsive adjustments */
+/* Tribute Section */
+.tribute-section {
+    padding: 6rem 0;
+    background: white;
+}
+
+.tribute-wall {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.tribute-item {
+    background: var(--cream);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--gold);
+}
+
+.tribute-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.tribute-header h4 {
+    color: var(--dark-brown);
+    font-size: 1.3rem;
+}
+
+.tribute-date {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.tribute-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.tribute-author {
+    text-align: right;
+    font-style: italic;
+    color: var(--text-light);
+}
+
+/* Poem Section */
+.poem-section {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, var(--dark-brown), var(--ethiopian-green));
+    color: white;
+}
+
+.poem-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.poem-content h3 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--gold);
+}
+
+.poem-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    line-height: 2;
+    margin-bottom: 2rem;
+}
+
+.poem-author {
+    font-size: 1.1rem;
+    color: var(--gold);
+}
+
+/* Footer */
+.footer {
+    background: var(--dark-brown);
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.footer-text {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.footer-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--gold);
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    .slideshow-main img {
-        height: 400px;
+    .nav-menu {
+        flex-direction: column;
+        gap: 1rem;
     }
     
-    .thumbnail-grid {
-        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-        max-height: 200px;
+    .hero-title {
+        font-size: 2.5rem;
     }
     
-    .slide-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
+    .hero-subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .teffbar-story {
+        padding: 2rem;
+    }
+    
+    .memory-form {
+        padding: 2rem;
     }
 }
 
-/* Scrollbar styling for thumbnail grid */
-.thumbnail-grid::-webkit-scrollbar {
-    width: 8px;
-}
-
-.thumbnail-grid::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-.thumbnail-grid::-webkit-scrollbar-thumb {
-    background: var(--ethiopian-green);
-    border-radius: 4px;
-}
-
-.thumbnail-grid::-webkit-scrollbar-thumb:hover {
-    background: #056622;
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
 }
 
